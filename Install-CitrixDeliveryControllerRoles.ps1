@@ -25,7 +25,7 @@
 #>	
 
 
-if ($env:EducateITLogs -eq "") {
+f ($env:EducateITLogs -eq $null) {
     New-Item "C:\EducateITLogs"
     $env:EducateITLogs = "C:\EducateITLogs"
 }
