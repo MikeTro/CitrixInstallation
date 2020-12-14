@@ -26,7 +26,9 @@
 
 
 if ($env:EducateITLogs -eq $null) {
-    New-Item "C:\EducateITLogs"
+    if (Test-Path "C:\EducateITLogs" -PathType Leaf) {
+        New-Item "C:\EducateITLogs"
+    }    
     $env:EducateITLogs = "C:\EducateITLogs"
 }
 
@@ -62,7 +64,7 @@ switch -wildcard ($WindowsVersion)
     { 
         "*10*" { 
                 $OSVER = "W2K16"
-                $OSName = "Windows Server 2016"
+                $OSName = "Windows Server 2016 / 2019"
                 $Install_RolesAndFeaturesLogFile = Join-Path $LogDir "Install_RolesAndFeatures.log"
                 $MyLogger.Info("The current operating system is $($OSNAME) ($($OSVER))")
                 $MyLogger.Info("Start the installation ...")
