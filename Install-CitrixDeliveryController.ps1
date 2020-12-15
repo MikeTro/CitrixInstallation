@@ -39,10 +39,10 @@ $env:SEE_MASK_NOZONECHECKS = 1
 
 $MyLogger.Info("Install the Citrix Delivery Controller")
 
-$SetupFile = Join-Path $InstallSourcePath "Files\x64\XenDesktop Setup\XenDesktopServerSetup.exe"
+$SetupFile = Join-Path $InstallSourcePath "x64\XenDesktop Setup\XenDesktopServerSetup.exe"
 #$Arguments = "/components controller,desktopstudio /configure_firewall /nosql /noreboot /quiet /logpath ""$LogDir"""
 $Arguments = "/components controller,desktopstudio /configure_firewall /noreboot /quiet /logpath ""$LogDir"""
-Invoke-Executable -FilePath $SetupFile -Arguments $Arguments
+Invoke-EitExecutable -FilePath $SetupFile -Arguments $Arguments
 
 # Enable File Security  
 Remove-Item env:\SEE_MASK_NOZONECHECKS
