@@ -27,6 +27,7 @@ $ScriptPath = $MyInvocation.MyCommand.Path
 $ScriptDirectory = Split-Path $ScriptPath -Parent
 $ComputerName = $env:ComputerName
 
+
 if ($env:EducateITLogs -eq $null) {
     if (Test-Path "C:\EducateITLogs" -PathType Leaf) {
         New-Item "C:\EducateITLogs"
