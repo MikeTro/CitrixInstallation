@@ -248,7 +248,7 @@ if ( $SiteExists ) {
                 $MyLogger.Info("Join site using controller $Controller ($y of $x)")
                 try {
                     Add-XDController -SiteControllerAddress $Controller  | Out-Null
-                    "$MyLogger.Info("The local server was successfully joined to the site '$SiteName'")
+                    $MyLogger.Info("The local server was successfully joined to the site '$SiteName'")
                     Break
                 } catch {
                     $MyLogger.Error("An error occurred trying to join using controller $Controller (error: $($Error[0]))")
@@ -265,7 +265,7 @@ if ( $SiteExists ) {
     $MyLogger.Info("Create the XenDesktop site '$SiteName'")
     try {
         New-XDSite -DatabaseServer $DatabaseServer -LoggingDatabaseName $DatabaseName_Logging -MonitorDatabaseName $DatabaseName_Monitoring -SiteDatabaseName $DatabaseName_Site -SiteName $SiteName -AdminAddress $ComputerName -ErrorAction Stop  | Out-Null
-        "$MyLogger.Info("The site '$SiteName' was created successfully")
+        $MyLogger.Info("The site '$SiteName' was created successfully")
     } catch {
         $MyLogger.Error("An error occurred trying to create the site '$SiteName' (error: $($Error[0]))")
         Exit 1
@@ -278,7 +278,7 @@ if ( $SiteExists ) {
     $MyLogger.Info("Set the license server")
     try {
         Set-XDLicensing -AdminAddress $ComputerName -LicenseServerAddress $LicenseServer -LicenseServerPort $LicenseServerPort -Force  | Out-Null
-        "$MyLogger.Info("The license server '$LicenseServer' was configured successfully")
+        $MyLogger.Info("The license server '$LicenseServer' was configured successfully")
     } catch {
         $MyLogger.Error("An error occurred trying to configure the license server '$LicenseServer' (error: $($Error[0]))")
         Exit 1
@@ -356,7 +356,7 @@ if ( $SiteExists ) {
     $MyLogger.Info("Disable connection leasing")
     try {
         Set-BrokerSite -ConnectionLeasingEnabled $false | Out-Null
-        "$MyLogger.Info("Connection leasing was disabled successfully")
+        $MyLogger.Info("Connection leasing was disabled successfully")
     } catch {
         $MyLogger.Error("An error occurred trying to disable connection leasing (error: $($Error[0]))")
         Exit 1
