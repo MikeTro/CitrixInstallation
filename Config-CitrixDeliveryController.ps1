@@ -25,6 +25,7 @@ if($verbose){ $global:VerbosePreference = "Continue" }
 #==========================================================================
 $ScriptPath = $MyInvocation.MyCommand.Path
 $ScriptDirectory = Split-Path $ScriptPath -Parent
+$ComputerName = $env:ComputerName
 
 if ($env:EducateITLogs -eq $null) {
     if (Test-Path "C:\EducateITLogs" -PathType Leaf) {

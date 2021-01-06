@@ -1,17 +1,17 @@
 <SiteConfig>
-    <SiteName>MySite</SiteName> # The name of your XenDesktop site. For example: "MySite".
-    <DatabaseServer>MySQLServer</DatabaseServer> # The name of your SQL server or SQL server instance (e.g. "SQLServer1.mycompany.com" or "SQLCTX01.mycompany.com\InStance1").
+    <SiteName>EducateITLabSite01</SiteName> # The name of your XenDesktop site. For example: "MySite".
+    <DatabaseServer>ws19120012</DatabaseServer> # The name of your SQL server or SQL server instance (e.g. "SQLServer1.mycompany.com" or "SQLCTX01.mycompany.com\InStance1").
     <DatabaseServerPort>1433</DatabaseServerPort> # The SQL port number (1433 by default)
     <DatabaseName_Site>CTX_Site_DB</DatabaseName_Site> # The name for the site database. For example: "CTX_Site_DB".
     <DatabaseName_Logging>CTX_Logging_DB</DatabaseName_Logging> # The name for the logging database. For example: "CTX_Logging_DB".
     <DatabaseName_Monitoring>CTX_Monitoring_DB</DatabaseName_Monitoring> # The name for the monitoring database. For example: "CTX_Monitoring_DB".
-    <LicenseServer>MyLicenseServer</LicenseServer> # The name of your license server, for example: mylicserver.mycompany.com.
+    <LicenseServer>ws19120012</LicenseServer> # The name of your license server, for example: mylicserver.mycompany.com.
     <LicenseServerPort>27000</LicenseServerPort>  # The port number for the initial contact, for example 27000 (this is the default value)
     <LicensingModel>UserDevice</LicensingModel>  # The licensing model. Possible values are UserDevice and Concurrent.
     <ProductCode>XDT</ProductCode> # The product code. Possible values are XDT (for XenDesktop) or MPS (for the XenDesktop 7.x App Edition).
     <ProductEdition>PLT</ProductEdition> # The product edition. Possible values are STD (Standard), ENT (Enterprise) or PLT (Platinum). 
-    <AdminGroup>MyDomain\MyAdminGroup</AdminGroup>  # The name of the Active Directory user or group, for example "MyDomain\CTXAdmins".
+    <AdminGroup>LAB.EDUCATEIT.CH\DL_PF00-Access_A_000</AdminGroup>  # The name of the Active Directory user or group, for example "MyDomain\CTXAdmins".
     <Role>Full Administrator</Role>  # The role to assign to the new XenDesktop administrator. The following built-in roles are available:
     <Scope>All</Scope>  # The scope (the objects) to which the permissions (defined in the role) apply
     <GroomingDays>365</GroomingDays>                 
-</SiteConfig
+</SiteConfig>
