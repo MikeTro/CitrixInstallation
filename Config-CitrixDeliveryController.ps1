@@ -14,13 +14,17 @@
            
 #>	
 
-
-
-
+#==========================================================================
 # define Error handling
-# note: do not change these values
+#==========================================================================
 $global:ErrorActionPreference = "Stop"
 if($verbose){ $global:VerbosePreference = "Continue" }
+
+#==========================================================================
+# global vars
+#==========================================================================
+$ScriptPath = $MyInvocation.MyCommand.Path
+$ScriptDirectory = Split-Path $ScriptPath -Parent
 
 f ($env:EducateITLogs -eq $null) {
     if (Test-Path "C:\EducateITLogs" -PathType Leaf) {
@@ -32,8 +36,6 @@ f ($env:EducateITLogs -eq $null) {
 $LogDir     = $env:EducateITLogs
 $LogFile    = $env:EducateITLogs + "\" + $MyInvocation.MyCommand.Name + ".log"
 $MyLogger   = New-EitFileLogger -LogFilePath $LogFile	
-
-
 #==========================================================================
 
 
@@ -43,23 +45,33 @@ $env:SEE_MASK_NOZONECHECKS = 1
 $MyLogger.Info("Create and configure the XenDesktop site")
 
 # -----------------------------------
-# CUSTOMIZE THE FOLLOWING VARIABLES TO YOUR REQUIREMENTS
+# CUSTOMIZE THE FOLLOWING VARIABLES IN FILE CitrixSiteConfig.xml TO YOUR REQUIREMENTS
 # -----------------------------------
-$SiteName = "MySite"                                                      # The name of your XenDesktop site. For example: "MySite".
-$DatabaseServer = "MySQLServer"                                           # The name of your SQL server or SQL server instance (e.g. "SQLServer1.mycompany.com" or "SQLCTX01.mycompany.com\InStance1").
-$DatabaseServerPort = "1433"                                              # The SQL port number (1433 by default)
-$DatabaseName_Site = "CTX_Site_DB"                                        # The name for the site database. For example: "CTX_Site_DB".
-$DatabaseName_Logging = "CTX_Logging_DB"                                  # The name for the logging database. For example: "CTX_Logging_DB".
-$DatabaseName_Monitoring = "CTX_Monitoring_DB"                            # The name for the monitoring database. For example: "CTX_Monitoring_DB".
-$LicenseServer = "MyLicenseServer"                                        # The name of your license server, for example: mylicserver.mycompany.com.
-$LicenseServerPort = 27000                                                # The port number for the initial contact, for example 27000 (this is the default value)
-$LicensingModel = "UserDevice"                                            # The licensing model. Possible values are UserDevice and Concurrent.
-$ProductCode = "XDT"                                                      # The product code. Possible values are XDT (for XenDesktop) or MPS (for the XenDesktop 7.x App Edition).
-$ProductEdition = "PLT"                                                   # The product edition. Possible values are STD (Standard), ENT (Enterprise) or PLT (Platinum). 
-$AdminGroup = "MyDomain\MyAdminGroup"                                     # The name of the Active Directory user or group, for example "MyDomain\CTXAdmins".
-$Role ="Full Administrator"                                               # The role to assign to the new XenDesktop administrator. The following built-in roles are available:
-$Scope = "All"                                                            # The scope (the objects) to which the permissions (defined in the role) apply
-$GroomingDays = 365                                                       # The number of days you want to monitoring data to be saved in the database, for example 365 days.
+
+[string]    $ConfigFile = $ScriptDirectory + "\CitrixSiteConfig.xml" 
+[string]    $XmlRoot = "SiteConfig"
+[xml]       $SiteConfig = [xml] (Get-Content $ConfigFile )
+
+	$Customer	= $cfg.$root.Customer
+
+
+
+
+$SiteName =                 $SiteConfig.$XmlRoot.SiteName
+$DatabaseServer =           $SiteConfig.$XmlRoot.DatabaseServer
+$DatabaseServerPort =       $SiteConfig.$XmlRoot.DatabaseServerPort
+$DatabaseName_Site =        $SiteConfig.$XmlRoot.DatabaseName_Site
+$DatabaseName_Logging =     $SiteConfig.$XmlRoot.DatabaseName_Logging
+$DatabaseName_Monitoring =  $SiteConfig.$XmlRoot.DatabaseName_Logging
+$LicenseServer =            $SiteConfig.$XmlRoot.LicenseServer    
+$LicenseServerPort =        $SiteConfig.$XmlRoot.LicenseServerPort    
+$LicensingModel =           $SiteConfig.$XmlRoot.LicensingModel
+$ProductCode =              $SiteConfig.$XmlRoot.ProductCode
+$ProductEdition =           $SiteConfig.$XmlRoot.ProductEdition   
+$AdminGroup =               $SiteConfig.$XmlRoot.AdminGroup
+$Role =                     $SiteConfig.$XmlRoot.Role
+$Scope =                    $SiteConfig.$XmlRoot.Scope
+$GroomingDays =             $SiteConfig.$XmlRoot.GroomingDays    
 # -----------------------------------
 
 # Log Variables
