@@ -73,8 +73,11 @@ $DefaultStoreFrontLogPath = "$env:SystemRoot\temp\StoreFront"
 
 
 # Install StoreFront
-$SetupFile = Join-Path $InstallSourcePath "StoreFront\CitrixStoreFront-x64.exe"
+$SetupFile = Join-Path $InstallSourcePath "x64\StoreFront\CitrixStoreFront-x64.exe"
 $Arguments = "-silent"
+
+$MyLogger.Info("   Execute $SetupFile $Arguments")
+
 Invoke-EitExecutable -FilePath $SetupFile -Arguments $Arguments
 
 # Copy the StoreFront log files from the StoreFront default log directory to our custom directory
